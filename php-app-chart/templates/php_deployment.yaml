@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: php
+  labels:
+    tier: {{ .Values.tierLabel }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.nameBack }}
+      tier: {{ .Values.tierLabel }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.nameBack }}
+        tier: {{ .Values.tierLabel }}
+    spec:
+      volumes:
+      - name: code
+        persistentVolumeClaim:
+          claimName: code
+      containers:
+      - name: php
+        image: php:7-fpm
+        volumeMounts:
+        - name: code
+          mountPath: /code
+      initContainers:
+      - name: install
+        image: busybox
+        volumeMounts:
+        - name: code
+          mountPath: /code
+        command:
+        - wget
+        - "-O"
+        - "/code/index.php"
+        - https://raw.githubusercontent.com/cp38510/eks-php/master/index.php

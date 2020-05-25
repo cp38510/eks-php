@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: php
+  labels:
+    tier: {{ .Values.tierLabel }}
+spec:
+  selector:
+    app: {{ .Values.nameBack }}
+    tier: {{ .Values.tierLabel }}
+  ports:
+  - protocol: TCP
+    port: 9000

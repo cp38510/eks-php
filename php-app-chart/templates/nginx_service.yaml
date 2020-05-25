@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx
+  labels:
+    tier: {{ .Values.tierLabel }}
+    app: {{ .Values.nameFront }}
+spec:
+  selector:
+    app: {{ .Values.nameFront }}
+    tier: {{ .Values.tierLabel }}
+  ports:
+  - protocol: TCP
+    port: 80
