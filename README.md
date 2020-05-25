@@ -1,7 +1,7 @@
 # Deploy EKS cluster with PHP application to AWS
 
 
-## Run deploy container
+## Prepare for deploy, run deploy container
 
 If you have .aws config on localhost machine, run:
 ```bash
