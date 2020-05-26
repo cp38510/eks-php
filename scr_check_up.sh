@@ -19,4 +19,7 @@ do
     sleep 5s
 done
 
-echo "Deploying PHP service to EKS done, check domain: $DOMAIN"
+echo -e "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+echo -e "Deploying PHP service to EKS done!\nCheck domain: $DOMAIN"
+echo -e "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+
