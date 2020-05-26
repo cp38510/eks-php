@@ -21,6 +21,12 @@ RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s 
     chmod +x ./kubectl && \
     sudo mv ./kubectl /usr/local/bin/kubectl
 
+
+RUN curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 && \
+    chmod 700 get_helm.sh && \
+    bash ./get_helm.sh
+
+
 RUN  apt-get clean
 
 RUN git clone https://github.com/cp38510/eks-php.git
