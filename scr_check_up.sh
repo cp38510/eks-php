@@ -13,7 +13,7 @@ do
 done
 
 
-until $(curl -s --fail $DOMAIN |grep HOSTNAME |grep -c "php-"" > /dev/null); do
+until $(curl -s --fail $DOMAIN |grep HOSTNAME |grep -c "php-" > /dev/null); do
     echo "Service starting..."
     sleep 5s
 done
