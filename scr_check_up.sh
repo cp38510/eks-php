@@ -13,11 +13,11 @@ do
 done
 
 
-while [ "$(curl -s $DOMAIN |grep HOSTNAME |grep -c "php-")" -eq 0 ]
-do
+until $(curl -s --fail $DOMAIN |grep HOSTNAME |grep -c "php-"" > /dev/null); do
     echo "Service starting..."
     sleep 5s
 done
+
 
 echo -e "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
 echo -e "Deploying PHP service to EKS done!\nCheck domain: $DOMAIN"
