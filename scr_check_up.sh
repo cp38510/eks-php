@@ -1,10 +1,8 @@
 #!/bin/bash
 DOMAIN="$(kubectl get svc |grep LoadBalancer |awk '{print $4}')"
-RESULT="0"
 
-themagic() {
-RESULT="$(curl -s $DOMAIN |grep HOSTNAME |grep -c "php-")"
-}
+aws eks list-clusters |grep -c php
+if [ $? -ne 0 ]; then echo "ERROR, EKS cluster not exist, check: aws eks list-clusters" && exit 1; fi
 
 
 while [ -z "$DOMAIN" ]
@@ -14,12 +12,11 @@ do
     DOMAIN="$(kubectl get svc |grep LoadBalancer |awk '{print $4}')"
 done
 
-RESULT="$(curl -s $DOMAIN |grep HOSTNAME |grep -c "php-*")"
-while [ "$RESULT" -eq 0 ]
+
+while [ "$(curl -s $DOMAIN |grep HOSTNAME |grep -c "php-")" -eq 0 ]
 do
     echo "Service starting..."
     sleep 5s
-    themagic
 done
 
 echo "Deploying PHP service to EKS done, check domain: $DOMAIN"
