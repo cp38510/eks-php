@@ -6,6 +6,10 @@ git pull
 #Init
 terraform init terraform-provision-eks-cluster
 
+#Terraform plan
+terraform plan terraform-provision-eks-cluster
+if [ $? -ne 0 ]; then echo "ERROR, terraform plan with warnings, check errors in the plan" && exit 1; fi
+
 #Install EKS cluster
 terraform apply -auto-approve terraform-provision-eks-cluster
 
