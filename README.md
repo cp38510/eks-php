@@ -16,6 +16,21 @@ aws configure
 ```
 
 
+## Change EKS cluster
+For deploy EKS cluster use terraform.  
+If you want change some variables, look files in directory terraform-provision-eks-cluster
+
+
+## Change service helm chart 
+For deploy application use helm.  
+If you want change some variables, look files in directory php-app-chart.  
+For update chart after install cluster you can use:
+```bash
+helm upgrade eks-php ./php-app-chart
+```
+
+
+
 ## Deploy cluster and application
 
 For deploy EKS cluster and PHP app, run:
