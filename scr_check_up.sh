@@ -14,10 +14,10 @@ do
 done
 
 
-RESULT="$(curl -s $DOMAIN |grep HOSTNAME | grep -c $(kubectl get pod |grep 'php-' |awk '{print $1}'))"
 while [ "$RESULT" -ne 3 ]; do
     echo "Service starting..."
     sleep 5s
+    RESULT="$(curl -s $DOMAIN |grep HOSTNAME | grep -c $(kubectl get pod |grep 'php-' |awk '{print $1}'))"
     echo $RESULT
 done
 
