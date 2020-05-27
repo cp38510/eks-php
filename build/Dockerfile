@@ -1,4 +1,4 @@
-FROM atlassian/ubuntu-minimal:latest
+FROM ubuntu:18.04
 
 RUN apt update && \
     apt -y install wget unzip curl git

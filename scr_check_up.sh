@@ -14,6 +14,8 @@ do
     echo $DOMAIN > /dev/null
 done
 
+
+
 POD_NAME="$(kubectl get pod |grep 'php-' |awk '{print $1}')"
 RESULT="$(curl -s $DOMAIN |grep HOSTNAME | grep -c $POD_NAME)"
 while [ "$RESULT" -ne 3 ]
