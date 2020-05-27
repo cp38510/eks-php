@@ -1,4 +1,5 @@
 #!/bin/bash
+#DOMAIN="1a3d0fd123b4d1414faa1ff2b4f27caf1-438975471.eu-central-1.elb.amazonaws.com"
 DOMAIN="$(kubectl get svc |grep LoadBalancer |awk '{print $4}')"
 
 
@@ -11,14 +12,21 @@ do
     echo "Domain creating..."
     sleep 5s
     DOMAIN="$(kubectl get svc |grep LoadBalancer |awk '{print $4}')"
+    echo $DOMAIN
 done
 
-
-while [ "$RESULT" -ne 3 ]; do
+POD_NAME="$(kubectl get pod |grep 'php-' |awk '{print $1}')"
+RESULT="$(curl -s $DOMAIN |grep HOSTNAME | grep -c $POD_NAME)"
+while [ "$RESULT" -ne 3 ]
+do
     echo "Service starting..."
     sleep 5s
-    RESULT="$(curl -s $DOMAIN |grep HOSTNAME | grep -c $(kubectl get pod |grep 'php-' |awk '{print $1}'))"
+    curl -s $DOMAIN |grep HOSTNAME | grep -c $POD_NAME > /dev/null
+    if [ $? -eq 0 ]; then break; fi
     echo $RESULT
+    echo $DOMAIN
+    echo $POD_NAME
+    DOMAIN="$(kubectl get svc |grep LoadBalancer |awk '{print $4}')"
 done
 
 
