@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #Update files
-git pull
+git fetch --all
 
 #Init
 terraform init terraform-provision-eks-cluster
