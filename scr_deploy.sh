@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "test"
+
 #Update files
 git fetch --all
 
