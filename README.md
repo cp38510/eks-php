@@ -5,7 +5,7 @@
 
 If you have .aws config on localhost machine, run:
 ```bash
-docker run -it -v /root/.aws/:/.aws cp38510/eks-php:ver1
+docker run -it -v /root/.aws/:/root/.aws cp38510/eks-php:ver1
 ```
 
 If that your first setup in AWS, create account in https://console.aws.amazon.com/iam/home?#/security_credentials  
