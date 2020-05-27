@@ -2,7 +2,6 @@
 #DOMAIN="1a3d0fd123b4d1414faa1ff2b4f27caf1-438975471.eu-central-1.elb.amazonaws.com"
 DOMAIN="$(kubectl get svc |grep LoadBalancer |awk '{print $4}')"
 
-echo "test"
 
 aws eks list-clusters |grep -c php
 if [ $? -ne 0 ]; then echo "ERROR, EKS cluster not exist, check: aws eks list-clusters" && exit 1; fi

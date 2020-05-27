@@ -2,6 +2,7 @@
 
 #Update files
 git fetch --all
+git reset --hard origin/master
 
 #Init
 terraform init terraform-provision-eks-cluster
